@@ -16,22 +16,22 @@ socket.on('connect', function() {
         nombre: nombre,
         sala: sala
     }, function(resp) {
-        console.log(resp);
+        renderHTML(resp);
     });
 });
 
 socket.on('disconnect', function() {});
 
 socket.on('updateRoom', function(resp) {
-    console.log('update room', resp);
+    renderHTML(resp);
 })
 
 socket.on('outRoom', function(msgRespuesta) {
-    console.log('Info del servidor', msgRespuesta);
+    renderHTML(msgRespuesta);
 });
 
 socket.on('sendMessage', function(resp) {
-    console.log('broadcast', resp);
+    renderMsg(resp, 'public');
 });
 
 socket.on('sendMessagePrivate', function(resp) {

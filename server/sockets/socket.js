@@ -13,16 +13,18 @@ io.on('connection', (client) => {
         callback(usuario.getUsuarioBySala(data.sala));
     });
 
-    client.on('sendMessage', (data) => {
+    client.on('sendMessage', (data, callback) => {
         let user = usuario.getUsuarioById(client.id);
         let message = createMessage(user[0].nombre, data.msg);
         client.broadcast.emit('sendMessage', message);
+        callback(message);
     });
 
-    client.on('sendMessagePrivate', (data) => {
+    client.on('sendMessagePrivate', (data, callback) => {
         let user = usuario.getUsuarioById(client.id);
         let message = createMessage(user[0].nombre, data.msg);
         client.broadcast.to(data.id).emit('sendMessagePrivate', message);
+        callback(message);
     });
 
 
